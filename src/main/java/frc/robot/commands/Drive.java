@@ -26,8 +26,17 @@ public class Drive extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   @Override
   public void execute() {
-    leftSpeed = m_robotContainer.getLeftAxis();
-    rightSpeed = m_robotContainer.getRightAxis();
+    leftSpeed = m_robotContainer.gamepad.getRawAxis(1);
+    rightSpeed = m_robotContainer.gamepad.getRawAxis(5);
+
+    if(leftSpeed < .2){
+      leftSpeed = 0;
+    }
+
+    if(rightSpeed < .2){
+      rightSpeed = 0;
+    }
+
     driveTrain.tankDrive(leftSpeed, rightSpeed);
   }
 
